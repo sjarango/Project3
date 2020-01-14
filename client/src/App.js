@@ -2,10 +2,12 @@ import React, { useState, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createEditor } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
+import {BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { increment, decrement } from "./actions";
-import { Editor, Note } from "./components";
+import { Editor, Note, Nav, Main, Login } from "./components";
 import "./index.css";
+import NotFound from "./components/404";
 
 function App(props) {
   const counter = useSelector(state => state.counter);
@@ -20,32 +22,17 @@ function App(props) {
   ]);
 
   return (
+    <Router>
     <div className="App">
-      <h1>counter {counter}</h1>
-      <button onClick={() => dispatch(increment())}>+</button>
-      <button onClick={() => dispatch(decrement())}>-</button>
-      {isLogged ? (
-        <h3>Valuable Information I should Only See While Logged in</h3>
-      ) : (
-        ""
-      )}
-      {/* <Slate editor={editor} value={value} onChange={value => setValue(value)}>
-      {console.log(editor)};
-      <Editable
-        onKeyDown={event => {
-          if (event.key === '&') {
-            // Prevent the ampersand character from being inserted.
-            event.preventDefault()
-            // Execute a command to insert text when the event occurs.
-            editor.insertText('and')
-          }
-        }}
-      />
-    </Slate> */}
-      <Note>
-        <Editor />
-      </Note>
+      <Nav />
+      <Switch>
+      <Route path="/" exact component={Login} />
+      <Route path="/home" exact component={Main} />
+      <Route path="/note" component={Note} />
+      <Route path="/404" component={NotFound} />
+      </Switch>
     </div>
+    </Router>
   );
 }
 
