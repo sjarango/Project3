@@ -1,31 +1,39 @@
 require("dotenv").config();
 const express = require("express");
 const passport = require("passport");
+const path = require("path");
 const mongoose = require("mongoose");
-const routes = require("./routes");
+const config = require("config");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-
-require("./auth/jwt")();
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(passport.initialize());
+
+app.use("/api/user", require("./routes/api/users"));
+app.use("/api/auth", require("./routes/api/auth"));
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
-}
-// Add routes, both API and view
-app.use(routes);
 
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
+//DB Config
+const db = config.get("mongoURI");
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true
-});
+mongoose
+  .connect(db, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true
+  })
+  .then(() => console.log("MongoDB Connected.."))
+  .catch(err => console.log(`won't connect ${err}`));
 
 // Start the API server
 app.listen(PORT, function() {
