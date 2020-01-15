@@ -24,7 +24,6 @@ function App(props) {
   return (
     <Router>
     <div className="App">
-      <Nav />
       <Switch>
       <Route path="/" exact component={Login} />
       <Route path="/home" exact component={Main} />

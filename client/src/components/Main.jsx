@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Nav } from './index';
 import '../index.css';
 
 
@@ -16,7 +17,8 @@ const Main = () => {
         console.log(allNotes);
     }
     return (
-        <div>
+        <div className="Main">
+            <Nav />
             <h1>Main Page</h1>
         </div>
     );

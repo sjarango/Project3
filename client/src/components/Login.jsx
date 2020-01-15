@@ -30,6 +30,9 @@ const Login = () => {
                     </div>
                 </div>
             </form>
+            <div>
+			<a href="/home">Go To Homepage</a>
+		</div>
         </div>
         </div>
     );

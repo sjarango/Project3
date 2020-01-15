@@ -1,12 +1,15 @@
 import React from 'react';
-import { Editor } from './index';
+import { Editor, Nav } from './index';
 import '../index.css';
 
 
 const Note = () => {
     return (
+        <div>
+            <Nav />
         <div className='Note'>
-            <Editor/>
+            <Editor />
+        </div>
         </div>
     );
 }

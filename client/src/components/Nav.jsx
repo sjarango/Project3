@@ -11,7 +11,7 @@ const Nav = () => {
 
     return (
 <nav>
-    <Link style={navStyle} to='/'>
+    <Link style={navStyle} to='/home'>
     <h3>Home</h3>
     </Link>
     <ul className='nav-links'>
