@@ -8,7 +8,7 @@ const Note = () => {
         <div className='Note'>
             <Editor/>
         </div>
-    )
+    );
 }
 
-export default Note
+export default Note;

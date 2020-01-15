@@ -2,9 +2,10 @@ import React, { useState, useMemo, useEffect } from "react";
 import { useSelector, useDispatch, Provider } from "react-redux";
 import { createEditor } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { loadUser } from "./actions/authAction";
-import { Editor, Note } from "./components";
+import { Editor, Note, Nav, Main, Login, NotFound } from "./components";
 import "./index.css";
 import { store } from "./index";
 function App(props) {
@@ -23,24 +24,17 @@ function App(props) {
     store.dispatch(loadUser());
   });
   return (
-    <div className="App">
-      {/* <Slate editor={editor} value={value} onChange={value => setValue(value)}>
-      {console.log(editor)};
-      <Editable
-        onKeyDown={event => {
-          if (event.key === '&') {
-            // Prevent the ampersand character from being inserted.
-            event.preventDefault()
-            // Execute a command to insert text when the event occurs.
-            editor.insertText('and')
-          }
-        }}
-      />
-    </Slate> */}
-      <Note>
-        <Editor />
-      </Note>
-    </div>
+    <Router>
+      <div className="App">
+        <Nav />
+        <Switch>
+          <Route path="/" exact component={Login} />
+          <Route path="/home" exact component={Main} />
+          <Route path="/note" component={Note} />
+          <Route path="/404" component={NotFound} />
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
