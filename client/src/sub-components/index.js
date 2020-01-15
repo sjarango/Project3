@@ -1,6 +1,6 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { cx, css } from 'emotion'
+import React from "react";
+import ReactDOM from "react-dom";
+import { cx, css } from "emotion";
 
 export const Button = React.forwardRef(
   ({ className, active, reversed, ...props }, ref) => (
@@ -13,23 +13,23 @@ export const Button = React.forwardRef(
           cursor: pointer;
           color: ${reversed
             ? active
-              ? 'white'
-              : '#aaa'
+              ? "white"
+              : "#aaa"
             : active
-            ? 'black'
-            : '#ccc'};
+            ? "black"
+            : "#ccc"};
         `
       )}
     />
   )
-)
+);
 
 export const EditorValue = React.forwardRef(
   ({ className, value, ...props }, ref) => {
     const textLines = value.document.nodes
       .map(node => node.text)
       .toArray()
-      .join('\n')
+      .join("\n");
     return (
       <div
         ref={ref}
@@ -66,16 +66,16 @@ export const EditorValue = React.forwardRef(
           {textLines}
         </div>
       </div>
-    )
+    );
   }
-)
+);
 
 export const Icon = React.forwardRef(({ className, ...props }, ref) => (
   <span
     {...props}
     ref={ref}
     className={cx(
-      'material-icons',
+      "material-icons",
       className,
       css`
         font-size: 18px;
@@ -83,7 +83,7 @@ export const Icon = React.forwardRef(({ className, ...props }, ref) => (
       `
     )}
   />
-))
+));
 
 export const Instruction = React.forwardRef(({ className, ...props }, ref) => (
   <div
@@ -100,7 +100,7 @@ export const Instruction = React.forwardRef(({ className, ...props }, ref) => (
       `
     )}
   />
-))
+));
 
 export const Menu = React.forwardRef(({ className, ...props }, ref) => (
   <div
@@ -119,11 +119,11 @@ export const Menu = React.forwardRef(({ className, ...props }, ref) => (
       `
     )}
   />
-))
+));
 
 export const Portal = ({ children }) => {
-  return ReactDOM.createPortal(children, document.body)
-}
+  return ReactDOM.createPortal(children, document.body);
+};
 
 export const Toolbar = React.forwardRef(({ className, ...props }, ref) => (
   <Menu
@@ -140,4 +140,4 @@ export const Toolbar = React.forwardRef(({ className, ...props }, ref) => (
       `
     )}
   />
-))
+));
