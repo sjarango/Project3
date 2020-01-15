@@ -1,12 +1,12 @@
-import React, { useState, useMemo } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState, useMemo, useEffect } from "react";
+import { useSelector, useDispatch, Provider } from "react-redux";
 import { createEditor } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
 
-import { increment, decrement } from "./actions";
+import { loadUser } from "./actions/authAction";
 import { Editor, Note } from "./components";
 import "./index.css";
-
+import { store } from "./index";
 function App(props) {
   const counter = useSelector(state => state.counter);
   const isLogged = useSelector(state => state.isLogged);
@@ -19,16 +19,11 @@ function App(props) {
     }
   ]);
 
+  useEffect(() => {
+    store.dispatch(loadUser());
+  });
   return (
     <div className="App">
-      <h1>counter {counter}</h1>
-      <button onClick={() => dispatch(increment())}>+</button>
-      <button onClick={() => dispatch(decrement())}>-</button>
-      {isLogged ? (
-        <h3>Valuable Information I should Only See While Logged in</h3>
-      ) : (
-        ""
-      )}
       {/* <Slate editor={editor} value={value} onChange={value => setValue(value)}>
       {console.log(editor)};
       <Editable
