@@ -5,7 +5,8 @@ import { Slate, Editable, withReact } from "slate-react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { loadUser } from "./actions/authAction";
-import { Editor, Note, Nav, Main, Login, NotFound } from "./components";
+import { Editor, Note, Nav, Main, Login } from "./components";
+import NotFound from "./components/404";
 import "./index.css";
 import { store } from "./index";
 function App(props) {
