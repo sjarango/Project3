@@ -1,14 +1,14 @@
-import React, { useState, useMemo } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState, useMemo, useEffect } from "react";
+import { useSelector, useDispatch, Provider } from "react-redux";
 import { createEditor } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
-import {BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import { increment, decrement } from "./actions";
+import { loadUser } from "./actions/authAction";
 import { Editor, Note, Nav, Main, Login } from "./components";
-import "./index.css";
 import NotFound from "./components/404";
-
+import "./index.css";
+import { store } from "./index";
 function App(props) {
   const counter = useSelector(state => state.counter);
   const isLogged = useSelector(state => state.isLogged);
@@ -21,6 +21,9 @@ function App(props) {
     }
   ]);
 
+  useEffect(() => {
+    store.dispatch(loadUser());
+  });
   return (
     <Router>
     <div className="App">
