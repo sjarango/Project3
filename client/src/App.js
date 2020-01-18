@@ -1,15 +1,15 @@
 import React, { useState, useMemo, useEffect } from "react";
-import { useSelector, useDispatch, Provider } from "react-redux";
+import { Provider } from "react-redux";
 import { createEditor } from "slate";
-import { Slate, Editable, withReact } from "slate-react";
+import { withReact } from "slate-react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { loadUser } from "./actions/authAction";
-import { Editor, Note, Nav, Main } from "./components";
+import { Note, AppNavbar, Main } from "./components";
 import NotFound from "./components/404";
 import "./index.css";
 import store from "./store";
-import Register from "./components/Register";
+// import Register from "./components/Register";
 function App(props) {
   // const counter = useSelector(state => state.counter);
   // const isLogged = useSelector(state => state.isLogged);
@@ -29,11 +29,11 @@ function App(props) {
     <Provider store={store}>
       <Router>
         <div className="App">
-          <Nav />
+          <AppNavbar />
           <Switch>
             {/* <Route path="/" exact component={Register} /> */}
             <Route path="/home" exact component={Main} />
-            <Route path="/note" component={Note} />
+            <Route path="/notes" component={Note} />
             <Route path="/404" component={NotFound} />
           </Switch>
         </div>
