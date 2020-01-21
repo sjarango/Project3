@@ -1,14 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
 import { Editor, Nav } from './index';
 import '../index.css';
 
 
 const Note = () => {
+
+    const titleFont = {
+        fontSize: "2rem"
+      };
     return (
         <div>
             <Nav />
         <div className='Note'>
-            <Editor />
+        <InputGroup>
+        <InputGroupAddon addonType="prepend">
+          {/* <InputGroupText>
+            <Input addon type="checkbox" aria-label="Checkbox for following text input" />
+          </InputGroupText> */}
+        </InputGroupAddon>
+        <Input style={titleFont} placeholder="TITLE" />
+      </InputGroup>
+      <br></br>
+            <Editor title={useState} />
         </div>
         </div>
     );

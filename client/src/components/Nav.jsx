@@ -21,16 +21,16 @@ const Nav = () => {
         <Link style={navStyle} to="/note">
           <li>Note</li>
         </Link>
-        <Link style={navStyle} to="/">
+        <Link style={navStyle} to="*">
           <li>404</li>
         </Link>
-        <NavItem>
+        <NavItem style={navStyle}>
           <Logout />
         </NavItem>
-        <NavItem>
+        <NavItem style={navStyle}>
           <Register />
         </NavItem>
-        <NavItem>
+        <NavItem style={navStyle}>
           <Login />
         </NavItem>
       </ul>

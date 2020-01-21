@@ -45,6 +45,7 @@ code {
   justify-content: space-around;
   align-items: center;
   list-style: none;
+  color: white;
 }
 nav {
   display: flex;

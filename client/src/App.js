@@ -5,8 +5,7 @@ import { Slate, Editable, withReact } from "slate-react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { loadUser } from "./actions/authAction";
-import { Editor, Note, Nav, Main } from "./components";
-import NotFound from "./components/404";
+import { Editor, Note, Nav, Main, NotFound } from "./components";
 import "./index.css";
 import store from "./store";
 import Register from "./components/Register";
@@ -29,12 +28,10 @@ function App(props) {
     <Provider store={store}>
       <div className="App">
       <Router>
-          <Nav />
           <Switch>
-            {/* <Route path="/" exact component={Register} /> */}
-            <Route path="/home" exact component={Main} />
+            <Route path="/" exact component={Main} />
             <Route path="/note" component={Note} />
-            <Route path="/404" component={NotFound} />
+            <Route path="*" component={NotFound} />
           </Switch>
       </Router>
       </div>
