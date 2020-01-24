@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Nav } from './index';
+import { AppNavbar } from './index';
 import '../index.css';
 
 
@@ -18,7 +18,7 @@ const Main = () => {
     }
     return (
         <div className="Main">
-            <Nav />
+            <AppNavbar />
             <h1>Main Page</h1>
         </div>
     );

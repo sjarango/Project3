@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
-import { Editor, Nav } from './index';
+import { Editor, AppNavbar } from './index';
 import '../index.css';
 
 
@@ -11,7 +11,6 @@ const Note = () => {
       };
     return (
         <div>
-            <Nav />
         <div className='Note'>
         <InputGroup>
         <InputGroupAddon addonType="prepend">
@@ -24,6 +23,7 @@ const Note = () => {
       <br></br>
             <Editor title={useState} />
         </div>
+
         </div>
     );
 }
