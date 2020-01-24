@@ -3,6 +3,7 @@ import isHotkey from "is-hotkey";
 import { Editable, withReact, useSlate, Slate } from "slate-react";
 import { Editor, Transforms, createEditor } from "slate";
 import { withHistory } from "slate-history";
+import { Modal, ModalHeader, ModalBody } from "reactstrap";
 
 import { Button, Icon, Toolbar } from "../sub-components";
 import axios from "axios";
