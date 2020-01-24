@@ -3,7 +3,10 @@ import isHotkey from "is-hotkey";
 import { Editable, withReact, useSlate, Slate } from "slate-react";
 import { Editor, Transforms, createEditor } from "slate";
 import { withHistory } from "slate-history";
-import { Modal, ModalHeader, ModalBody } from "reactstrap";
+import { Modal, ModalHeader, ModalBody, InputGroup,
+  InputGroupAddon,
+  InputGroupText,
+  Input } from "reactstrap";
 
 import { Button, Icon, Toolbar } from "../sub-components";
 import axios from "axios";
@@ -23,6 +26,10 @@ const RichTextExample = () => {
   const renderLeaf = useCallback(props => <Leaf {...props} />, []);
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
   const [timeout, setNewTimeout] = useState(null);
+  
+  const titleFont = {
+    fontSize: "2rem"
+  };
 
   return (
     <Slate
@@ -41,7 +48,14 @@ const RichTextExample = () => {
         setNewTimeout(newTimeout);
         setValue(value);
       }}
-    >
+    >          <InputGroup>
+    <InputGroupAddon addonType="prepend">
+      {/* <InputGroupText>
+    <Input addon type="checkbox" aria-label="Checkbox for following text input" />
+  </InputGroupText> */}
+    </InputGroupAddon>
+    <Input style={titleFont} placeholder="TITLE" />
+  </InputGroup>
       <Toolbar>
         <MarkButton format="bold" icon="format_bold" />
         <MarkButton format="italic" icon="format_italic" />

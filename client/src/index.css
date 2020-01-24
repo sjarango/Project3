@@ -59,3 +59,9 @@ nav {
     flex-direction: column;
     margin: auto;
 }
+
+.Main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

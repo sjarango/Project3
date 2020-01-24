@@ -1,27 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { AppNavbar } from './index';
+import { Note } from './index';
 import '../index.css';
 
 
 const Main = () => {
-    useEffect(() => {
-        fetchItems();
-    }, []);
+    // useEffect(() => {
+    //     fetchItems();
+    // }, []);
 
-    const fetchItems = async () => {
-        const data = await fetch(
-            ''
-        );
+    // const [items, setItems] = useState([]);
+
+    // const fetchItems = async () => {
+    //     const data = await fetch(
+    //         '/api/notes'
+    //     );
         
-        const allNotes = await data.json();
-        console.log(allNotes);
-    }
-    return (
-        <div className="Main">
-            <AppNavbar />
-            <h1>Main Page</h1>
-        </div>
-    );
+    //     const items = await data.json();
+    //     console.log(items);
+    //     setItems(items);
+    //     }
+    // return (
+    //     <div className="Main">
+    //         {items.map(item => (
+    //             <Note key={items._id}>{items.title}</Note>
+    //         ))}
+    //     </div>
+    // );
 }
 
 export default Main;
