@@ -13,13 +13,7 @@ import "../index.css";
 // export default Note;
 
 import React, { useState } from "react";
-import {
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-} from "reactstrap";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 const Note = props => {
   const { buttonLabel, className } = props;
@@ -34,9 +28,13 @@ const Note = props => {
       <Button color="danger" onClick={toggle}>
         {buttonLabel}
       </Button>{" "}
-      <Modal isOpen={modal} toggle={toggle} className={className}>
-        <ModalHeader toggle={toggle}>
-        </ModalHeader>
+      <Modal
+        onClosed={() => props.onClosed(props.item._id)}
+        isOpen={modal}
+        toggle={toggle}
+        className={className}
+      >
+        <ModalHeader toggle={toggle}></ModalHeader>
         <ModalBody>
           <div className="Note">
             <Editor title={useState} item={props.item} />
