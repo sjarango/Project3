@@ -11,6 +11,13 @@ router.get("/", (req, res) => {
     .sort({ date: -1 })
     .then(notes => res.json(notes));
 });
+
+router.get("/:NoteId", (req, res) => {
+  const { NoteId } = req.params;
+  Notes.findById(NoteId)
+    .sort({ date: -1 })
+    .then(notes => res.json(notes));
+});
 //Update /api/notes/:NoteID
 //update note = id
 router.patch("/:NoteId", async (req, res) => {
@@ -31,7 +38,7 @@ router.post("/", (req, res) => {
     title: title,
     content: content
   });
-  newContent.save().then(notes => res.json(notes));
+  newContent.save().then(notes => res.send(notes._id));
 });
 //DELETE api/notes/:id
 //Delete an Note

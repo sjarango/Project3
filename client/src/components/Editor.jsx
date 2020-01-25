@@ -3,10 +3,15 @@ import isHotkey from "is-hotkey";
 import { Editable, withReact, useSlate, Slate } from "slate-react";
 import { Editor, Transforms, createEditor } from "slate";
 import { withHistory } from "slate-history";
-import { Modal, ModalHeader, ModalBody, InputGroup,
+import {
+  Modal,
+  ModalHeader,
+  ModalBody,
+  InputGroup,
   InputGroupAddon,
   InputGroupText,
-  Input } from "reactstrap";
+  Input
+} from "reactstrap";
 
 import { Button, Icon, Toolbar } from "../sub-components";
 import axios from "axios";
@@ -20,15 +25,19 @@ const HOTKEYS = {
 
 const LIST_TYPES = ["numbered-list", "bulleted-list"];
 
-const RichTextExample = (props) => {
+const RichTextExample = props => {
   let content = null;
-  if (props.item && props.item.content) {content = JSON.parse(props.item.content)}
+  if (props.item && props.item.content) {
+    content = JSON.parse(props.item.content);
+  }
   const [value, setValue] = useState(content || initialValue);
   const renderElement = useCallback(props => <Element {...props} />, []);
   const renderLeaf = useCallback(props => <Leaf {...props} />, []);
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
   const [timeout, setNewTimeout] = useState(null);
-  
+  const [NoteId, setNoteId] = useState(props.item._id || null);
+  const [title, setTitle] = useState(props.item.title || "placeholder");
+
   const titleFont = {
     fontSize: "2rem"
   };
@@ -41,23 +50,41 @@ const RichTextExample = (props) => {
         //auto save function send to the db.
         timeout && clearTimeout(timeout);
         const content = JSON.stringify(value);
-        const newTimeout = setTimeout(() => {
-          axios.post("/api/notes", {
-            content,
-            title: "chicken"
-          });
-        }, 5000);
+        let newTimeout;
+        if (NoteId) {
+          newTimeout = setTimeout(() => {
+            axios.patch(`/api/notes/${NoteId}`, {
+              content,
+              title: title
+            });
+          }, 5000);
+        } else {
+          newTimeout = setTimeout(async () => {
+            const { data } = await axios.post("/api/notes", {
+              content,
+              title: title
+            });
+            setNoteId(data);
+          }, 5000);
+        }
         setNewTimeout(newTimeout);
         setValue(value);
       }}
-    >          <InputGroup>
-    <InputGroupAddon addonType="prepend">
-      {/* <InputGroupText>
+    >
+      {" "}
+      <InputGroup>
+        <InputGroupAddon addonType="prepend">
+          {/* <InputGroupText>
     <Input addon type="checkbox" aria-label="Checkbox for following text input" />
   </InputGroupText> */}
-    </InputGroupAddon>
-    <Input style={titleFont} placeholder="TITLE" />
-  </InputGroup>
+        </InputGroupAddon>
+        <Input
+          style={titleFont}
+          value={title}
+          onChange={e => setTitle(e.target.value)}
+          placeholder="TITLE"
+        />
+      </InputGroup>
       <Toolbar>
         <MarkButton format="bold" icon="format_bold" />
         <MarkButton format="italic" icon="format_italic" />
