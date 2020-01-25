@@ -11,6 +11,17 @@ router.get("/", (req, res) => {
     .sort({ date: -1 })
     .then(notes => res.json(notes));
 });
+//Update /api/notes/:NoteID
+//update note = id
+router.patch("/:NoteId", async (req, res) => {
+  const { content, title } = req.body;
+  const { NoteId } = req.params;
+  const updateNote = await Notes.updateOne(
+    { _id: NoteId },
+    { $set: { title: title, content: content } }
+  );
+  res.json(updateNote);
+});
 
 //Post /api/notes
 // sends data to the db auto save 5 sec
@@ -24,8 +35,8 @@ router.post("/", (req, res) => {
 });
 //DELETE api/notes/:id
 //Delete an Note
-router.delete("/:id", (req, res) => {
-  const { id } = req.params;
+router.delete("/:NoteId", (req, res) => {
+  const { NoteId } = req.params;
   Notes.findById(id)
     .then(note => note.remove.then(() => res.json({ success: true })))
     .catch(err => res.status(404).json({ msg: `Id does not exist` }));
