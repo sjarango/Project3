@@ -26,7 +26,7 @@ const AllNotes = () => {
     return (
 		<div className="AllNotes">
 			{items.map(item => (
-			<Note />
+			<Note item={item} />
 			))}
 
 		</div>

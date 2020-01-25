@@ -27,7 +27,7 @@ const Note = props => {
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
-
+  console.log(props);
 
   return (
     <div>
@@ -39,7 +39,7 @@ const Note = props => {
         </ModalHeader>
         <ModalBody>
           <div className="Note">
-            <Editor title={useState} />
+            <Editor title={useState} item={props.item} />
           </div>{" "}
         </ModalBody>
         <ModalFooter>

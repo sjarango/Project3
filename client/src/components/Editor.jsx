@@ -20,8 +20,10 @@ const HOTKEYS = {
 
 const LIST_TYPES = ["numbered-list", "bulleted-list"];
 
-const RichTextExample = () => {
-  const [value, setValue] = useState(initialValue);
+const RichTextExample = (props) => {
+  let content = null;
+  if (props.item && props.item.content) {content = JSON.parse(props.item.content)}
+  const [value, setValue] = useState(content || initialValue);
   const renderElement = useCallback(props => <Element {...props} />, []);
   const renderLeaf = useCallback(props => <Leaf {...props} />, []);
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
