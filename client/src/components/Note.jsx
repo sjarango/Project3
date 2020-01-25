@@ -19,7 +19,8 @@ const Note = props => {
   const { buttonLabel, className } = props;
 
   const [modal, setModal] = useState(false);
-
+  const [editorContent, setEditorContent] = useState('')
+  const [editorTitle, setEditorTitle] = useState('')
   const toggle = () => setModal(!modal);
   console.log(props);
 
@@ -29,7 +30,7 @@ const Note = props => {
         {buttonLabel}
       </Button>{" "}
       <Modal
-        onClosed={() => props.onClosed(props.item._id)}
+        onClosed={() => props.onClosed(props.item._id, editorContent, editorTitle)}
         isOpen={modal}
         toggle={toggle}
         className={className}
@@ -37,7 +38,7 @@ const Note = props => {
         <ModalHeader toggle={toggle}></ModalHeader>
         <ModalBody>
           <div className="Note">
-            <Editor title={useState} item={props.item} />
+            <Editor title={useState} item={props.item} trackContent={setEditorContent} trackTitle={setEditorTitle}/>
           </div>{" "}
         </ModalBody>
         <ModalFooter>
