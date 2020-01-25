@@ -75,10 +75,14 @@ class Login extends Component {
     this.props.login(user);
   };
 
+  navStyle = {
+    color: "white"
+  };
+
   render() {
     return (
       <div>
-        <NavLink onClick={this.toggle} href="#">
+        <NavLink style={this.navStyle} onClick={this.toggle} href="#">
           Login
         </NavLink>
 
@@ -111,6 +115,9 @@ class Login extends Component {
                 />
                 <Button color="dark" style={{ marginTop: "2rem" }} block>
                   Login
+                </Button>
+                <Button color="dark" style={{ marginTop: "2rem" }} block>
+                  Sign Up
                 </Button>
               </FormGroup>
             </Form>

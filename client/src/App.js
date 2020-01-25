@@ -5,7 +5,7 @@ import { withReact } from "slate-react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { loadUser } from "./actions/authAction";
-import { Note, AppNavbar, Main } from "./components";
+import { Note, AppNavbar, Main, AllNotes } from "./components";
 import NotFound from "./components/404";
 import "./index.css";
 import store from "./store";
@@ -36,7 +36,8 @@ function App(props) {
             <Route path="/notes" component={Note} />
             <Route path="/404" component={NotFound} />
           </Switch>
-        </div>
+          <AllNotes />
+          </div>
       </Router>
     </Provider>
   );

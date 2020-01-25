@@ -19,10 +19,6 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText,
-  Input
 } from "reactstrap";
 
 const Note = props => {
@@ -31,10 +27,7 @@ const Note = props => {
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
-
-  const titleFont = {
-    fontSize: "2rem"
-  };
+  console.log(props);
 
   return (
     <div>
@@ -43,18 +36,10 @@ const Note = props => {
       </Button>{" "}
       <Modal isOpen={modal} toggle={toggle} className={className}>
         <ModalHeader toggle={toggle}>
-          <InputGroup>
-            <InputGroupAddon addonType="prepend">
-              {/* <InputGroupText>
-            <Input addon type="checkbox" aria-label="Checkbox for following text input" />
-          </InputGroupText> */}
-            </InputGroupAddon>
-            <Input style={titleFont} placeholder="TITLE" />
-          </InputGroup>
         </ModalHeader>
         <ModalBody>
           <div className="Note">
-            <Editor title={useState} />
+            <Editor title={useState} item={props.item} />
           </div>{" "}
         </ModalBody>
         <ModalFooter>

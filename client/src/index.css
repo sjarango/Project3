@@ -36,24 +36,32 @@ code {
 }
 
 .nav-links {
-    width: 50%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    list-style: none;
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+  color: white;
 }
 
 nav {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    min-height: 10vh;
-    background: rgb(42, 98, 133);
-    color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 10vh;
+  min-width: 100vh;
+  background: rgb(42, 98, 133);
+  color: white;
 }
 
 .App {
     display: flex;
     flex-direction: column;
     margin: auto;
+}
+
+.Main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

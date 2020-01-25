@@ -3,7 +3,10 @@ import isHotkey from "is-hotkey";
 import { Editable, withReact, useSlate, Slate } from "slate-react";
 import { Editor, Transforms, createEditor } from "slate";
 import { withHistory } from "slate-history";
-import { Modal, ModalHeader, ModalBody } from "reactstrap";
+import { Modal, ModalHeader, ModalBody, InputGroup,
+  InputGroupAddon,
+  InputGroupText,
+  Input } from "reactstrap";
 
 import { Button, Icon, Toolbar } from "../sub-components";
 import axios from "axios";
@@ -17,12 +20,18 @@ const HOTKEYS = {
 
 const LIST_TYPES = ["numbered-list", "bulleted-list"];
 
-const RichTextExample = () => {
-  const [value, setValue] = useState(initialValue);
+const RichTextExample = (props) => {
+  let content = null;
+  if (props.item && props.item.content) {content = JSON.parse(props.item.content)}
+  const [value, setValue] = useState(content || initialValue);
   const renderElement = useCallback(props => <Element {...props} />, []);
   const renderLeaf = useCallback(props => <Leaf {...props} />, []);
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
   const [timeout, setNewTimeout] = useState(null);
+  
+  const titleFont = {
+    fontSize: "2rem"
+  };
 
   return (
     <Slate
@@ -41,7 +50,14 @@ const RichTextExample = () => {
         setNewTimeout(newTimeout);
         setValue(value);
       }}
-    >
+    >          <InputGroup>
+    <InputGroupAddon addonType="prepend">
+      {/* <InputGroupText>
+    <Input addon type="checkbox" aria-label="Checkbox for following text input" />
+  </InputGroupText> */}
+    </InputGroupAddon>
+    <Input style={titleFont} placeholder="TITLE" />
+  </InputGroup>
       <Toolbar>
         <MarkButton format="bold" icon="format_bold" />
         <MarkButton format="italic" icon="format_italic" />
@@ -49,7 +65,6 @@ const RichTextExample = () => {
         <MarkButton format="code" icon="code" />
         <BlockButton format="heading-one" icon="looks_one" />
         <BlockButton format="heading-two" icon="looks_two" />
-        <BlockButton format="block-quote" icon="format_quote" />
         <BlockButton format="numbered-list" icon="format_list_numbered" />
         <BlockButton format="bulleted-list" icon="format_list_bulleted" />
       </Toolbar>
