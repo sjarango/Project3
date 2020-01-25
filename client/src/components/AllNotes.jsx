@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Note } from "./index";
 import "../index.css";
 
@@ -17,7 +18,22 @@ const AllNotes = () => {
     setItems(items);
   };
 
-  const onClosed = async itemId => {
+  const onClosed = async (itemId, editorContent, editorTitle) => {
+      if (editorContent.length || editorTitle.length){
+        if (itemId) {
+            await axios.patch(`/api/notes/${itemId}`, {
+                 content: editorContent,
+                 title: editorTitle
+               });
+           } else {
+         await axios.post("/api/notes", {
+             content: editorContent,
+             title: editorTitle
+           });
+         }
+      }
+
+
     const data = await fetch(`/api/notes/${itemId}`);
 
     const item = await data.json();
