@@ -29,6 +29,9 @@ code {
     width: 300px;
 }
 
+.w-100 {
+    width: 100vw!important;
+}
 
 /* .Note {
     max-width: 80%;
