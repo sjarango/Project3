@@ -1,39 +1,49 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 import axios from "axios";
 import { Note } from "./index";
 import "../index.css";
 
-const AllNotes = () => {
-  useEffect(() => {
-    fetchItems();
-  }, []);
-
-  const [items, setItems] = useState([]);
-
+const AllNotes = props => {
+  const { isAuthenticated, user } = props.auth;
   const fetchItems = async () => {
-    const data = await fetch("/api/notes");
+    if (!isAuthenticated) return null;
+    const { data } = await axios.get(
+      "/api/notes",
+      tokenConfig(props.auth.token)
+    );
 
-    const items = await data.json();
-    console.log(items);
-    setItems(items);
+    setItems(data);
   };
 
+  useEffect(() => {
+    fetchItems();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
+  const [items, setItems] = useState([]);
+
   const onClosed = async (itemId, editorContent, editorTitle) => {
-      if (editorContent.length || editorTitle.length){
-        if (itemId) {
-            await axios.patch(`/api/notes/${itemId}`, {
-                 content: editorContent,
-                 title: editorTitle
-               });
-           } else {
-         await axios.post("/api/notes", {
-             content: editorContent,
-             title: editorTitle
-           });
-         }
+    if (editorContent.length || editorTitle.length) {
+      if (itemId) {
+        await axios.patch(
+          `/api/notes/${itemId}`,
+          {
+            content: editorContent,
+            title: editorTitle
+          },
+          tokenConfig(props.auth.token)
+        );
+      } else {
+        await axios.post(
+          "/api/notes",
+          {
+            content: editorContent,
+            title: editorTitle
+          },
+          tokenConfig(props.auth.token)
+        );
       }
-
-
+    }
     const data = await fetch(`/api/notes/${itemId}`);
 
     const item = await data.json();
@@ -47,17 +57,41 @@ const AllNotes = () => {
       })
     );
   };
-  // const NoteSize = {
-  // 	maxHeight: "40px",
-  // 	maxWidth: "40px"
-  //   };
+  if (!isAuthenticated) return null;
   return (
     <div className="AllNotes">
+      <Note
+        item={{
+          title: ""
+        }}
+        onClosed={onClosed}
+        buttonLabel={"create new"}
+      />
       {items.map(item => (
-        <Note item={item} onClosed={onClosed} />
+        <Note item={item} onClosed={onClosed} buttonLabel={item.title} />
       ))}
     </div>
   );
 };
 
-export default AllNotes;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+const tokenConfig = token => {
+  // Headers
+  const config = {
+    headers: {
+      "Content-type": "application/json"
+    }
+  };
+
+  // If token, add to headers
+  if (token) {
+    config.headers["x-auth-token"] = token;
+  }
+
+  return config;
+};
+
+export default connect(mapStateToProps, null)(AllNotes);

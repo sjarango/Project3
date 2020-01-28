@@ -30,14 +30,14 @@ function App(props) {
       <Router>
         <div className="App">
           <AppNavbar />
-          <Switch>
-            {/* <Route path="/" exact component={Register} /> */}
+          {/* <Switch>
+            <Route path="/" exact component={Register} />
             <Route path="/home" exact component={Main} />
             <Route path="/notes" component={Note} />
             <Route path="/404" component={NotFound} />
-          </Switch>
+          </Switch> */}
           <AllNotes />
-          </div>
+        </div>
       </Router>
     </Provider>
   );
