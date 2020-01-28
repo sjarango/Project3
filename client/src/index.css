@@ -9,6 +9,26 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
+.AllNotes {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1200px;
+}
+
+.AllNotes div {
+    margin: 20px;
+    height: 300px;
+    width: 300px;
+}
+
+.AllNotes div button {
+    margin: auto;
+    height: 300px;
+    width: 300px;
+}
+
 
 /* .Note {
     max-width: 80%;
@@ -41,6 +61,7 @@ code {
     justify-content: space-around;
     align-items: center;
     list-style: none;
+    color: white;
 }
 
 nav {
@@ -48,6 +69,7 @@ nav {
     justify-content: space-around;
     align-items: center;
     min-height: 10vh;
+    min-width: 100vh;
     background: rgb(42, 98, 133);
     color: white;
 }
@@ -56,4 +78,11 @@ nav {
     display: flex;
     flex-direction: column;
     margin: auto;
+    align-items: center;
+}
+
+.Main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

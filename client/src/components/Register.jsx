@@ -76,10 +76,14 @@ class Register extends Component {
     this.props.register(newUser);
   };
 
+  navStyle = {
+    color: "white"
+  };
+
   render() {
     return (
-      <div>
-        <NavLink onClick={this.toggle} href="#">
+      <div classnName="Register">
+        <NavLink style={this.navStyle} onClick={this.toggle} href="#">
           Register
         </NavLink>
 
