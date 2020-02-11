@@ -29,7 +29,7 @@ class Login extends Component {
     isAuthenticated: PropTypes.bool,
     error: PropTypes.object.isRequired,
     login: PropTypes.func.isRequired,
-    clearError: PropTypes.func.isRequired
+    clearError: PropTypes.func
   };
   componentDidUpdate(prevProps) {
     const { error, isAuthenticated } = this.props;

@@ -3,15 +3,7 @@ import isHotkey from "is-hotkey";
 import { Editable, withReact, useSlate, Slate } from "slate-react";
 import { Editor, Transforms, createEditor } from "slate";
 import { withHistory } from "slate-history";
-import {
-  Modal,
-  ModalHeader,
-  ModalBody,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText,
-  Input
-} from "reactstrap";
+import { InputGroup, InputGroupAddon, Input } from "reactstrap";
 import { connect } from "react-redux";
 import { Button, Icon, Toolbar } from "../sub-components";
 import axios from "axios";
@@ -34,7 +26,6 @@ const RichTextExample = props => {
   const renderElement = useCallback(props => <Element {...props} />, []);
   const renderLeaf = useCallback(props => <Leaf {...props} />, []);
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
-  const [timeout, setNewTimeout] = useState(null);
   const [title, setTitle] = useState(props.item.title || "placeholder");
 
   const titleFont = {
@@ -46,33 +37,15 @@ const RichTextExample = props => {
       editor={editor}
       value={value}
       onChange={value => {
-        //auto save function send to the db.
-        timeout && clearTimeout(timeout);
         const content = JSON.stringify(value);
         props.trackContent(content);
         props.trackTitle(title);
-        const newTimeout = setTimeout(() => {
-          axios.post(
-            "/api/notes",
-            {
-              content,
-              title,
-              user: props.auth.user
-            },
-            tokenConfig(props.auth.token)
-          );
-        }, 5000);
-        setNewTimeout(newTimeout);
         setValue(value);
       }}
     >
       {" "}
       <InputGroup>
-        <InputGroupAddon addonType="prepend">
-          {/* <InputGroupText>
-    <Input addon type="checkbox" aria-label="Checkbox for following text input" />
-  </InputGroupText> */}
-        </InputGroupAddon>
+        <InputGroupAddon addonType="prepend"></InputGroupAddon>
         <Input
           style={titleFont}
           value={title}

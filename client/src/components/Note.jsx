@@ -1,16 +1,6 @@
-// import React from "react";
 import { Editor } from "./index";
 import "../index.css";
-
-// const Note = () => {
-//   return (
-//     <div className="Note">
-//       <Editor />
-//     </div>
-//   );
-// };
 import { connect } from "react-redux";
-// export default Note;
 import axios from "axios";
 import React, { useState } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
@@ -46,14 +36,7 @@ const Note = props => {
             <Button
               color="primary"
               onClick={() => {
-                axios.post(
-                  `/api/notes/delete`,
-                  {
-                    user: props.auth.user
-                  },
-                  tokenConfig(props.auth.token)
-                );
-
+                props.onDelete(props.item._id);
                 toggle();
               }}
             >
@@ -67,7 +50,7 @@ const Note = props => {
               toggle();
             }}
           >
-            Do Something
+            Save
           </Button>{" "}
           <Button color="secondary" onClick={toggle}>
             Cancel

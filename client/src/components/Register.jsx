@@ -29,7 +29,7 @@ class Register extends Component {
     isAuthenticated: PropTypes.bool,
     error: PropTypes.object.isRequired,
     register: PropTypes.func.isRequired,
-    clearError: PropTypes.func.isRequired
+    clearError: PropTypes.func
   };
   componentDidUpdate(prevProps) {
     const { error, isAuthenticated } = this.props;
@@ -82,7 +82,7 @@ class Register extends Component {
 
   render() {
     return (
-      <div classnName="Register">
+      <div className="Register">
         <NavLink style={this.navStyle} onClick={this.toggle} href="#">
           Register
         </NavLink>
