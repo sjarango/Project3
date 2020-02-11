@@ -43,20 +43,18 @@ const AllNotes = props => {
           tokenConfig(props.auth.token)
         );
       }
-    }
-    const data = await fetch(`/api/notes/${itemId}`);
 
-    const item = await data.json();
-    setItems(
-      items.map(i => {
-        if (i._id === itemId) {
-          return item;
-        } else {
-          return i;
-        }
-      })
-    );
+      fetchItems();
+    }
   };
+
+  const onDelete = (id) => {
+    axios.delete(
+      `/api/notes/${id}`,
+      tokenConfig(props.auth.token)
+    ).then(() => fetchItems());
+  };
+
   if (!isAuthenticated) return null;
   return (
     <div className="AllNotes">
@@ -68,7 +66,13 @@ const AllNotes = props => {
         buttonLabel={"create new"}
       />
       {items.map(item => (
-        <Note item={item} onClosed={onClosed} buttonLabel={item.title} />
+        <Note 
+        key={item._id}
+        item={item} 
+        onClosed={onClosed}
+        onDelete={onDelete}
+        buttonLabel={item.title} 
+        />
       ))}
     </div>
   );
