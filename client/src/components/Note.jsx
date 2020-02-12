@@ -1,7 +1,7 @@
 import { Editor } from "./index";
 import "../index.css";
 import { connect } from "react-redux";
-import axios from "axios";
+
 import React, { useState } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
