@@ -6,7 +6,6 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
   Container
 } from "reactstrap";
 import { connect } from "react-redux";
@@ -14,7 +13,6 @@ import PropTypes from "prop-types";
 import Register from "./Register";
 import Login from "./Login";
 import Logout from "./Logout";
-import Note from "./Note";
 
 class AppNavbar extends Component {
   state = {

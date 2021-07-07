@@ -116,9 +116,6 @@ class Login extends Component {
                 <Button color="dark" style={{ marginTop: "2rem" }} block>
                   Login
                 </Button>
-                <Button color="dark" style={{ marginTop: "2rem" }} block>
-                  Sign Up
-                </Button>
               </FormGroup>
             </Form>
           </ModalBody>

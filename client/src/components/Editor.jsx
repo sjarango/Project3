@@ -6,7 +6,6 @@ import { withHistory } from "slate-history";
 import { InputGroup, InputGroupAddon, Input } from "reactstrap";
 import { connect } from "react-redux";
 import { Button, Icon, Toolbar } from "../sub-components";
-import axios from "axios";
 
 const HOTKEYS = {
   "mod+b": "bold",
